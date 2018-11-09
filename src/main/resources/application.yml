@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active:
+    - dev
+
+---
+spring:
+  profiles: dev
+  application:
+    name: student-service
+  h2:
+    console:
+      path: /h2
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:student
+    driver-class-name: org.h2.Driver
+    platform: org.hibernate.dialect.H2Dialect
+    username: sa
+    password:
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  instance:
+    hostname: localhost
+    port: 8761
+server:
+  port: 8081
+
+logging:
+  level:
+    #web: debug
+    #root: debug
+    sql: trace
