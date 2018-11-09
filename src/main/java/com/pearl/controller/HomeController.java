@@ -12,12 +12,8 @@ public class HomeController {
 	@GetMapping("/")
 	@HystrixCommand(fallbackMethod="goHomeFallBack")
 	public String goHome() {
-		
-		if(RandomUtils.nextBoolean()) {
-			throw new RuntimeException("System Failure");
-		}
-		
-		return "Welcome to SIMS";
+
+		return "Welcome to Employee Service";
 	}
 	
 	

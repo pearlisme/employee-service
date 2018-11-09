@@ -19,6 +19,10 @@ spring:
     username: admin
     password: admin
 
+  security:
+    user:
+      name: admin
+      password: admin
   jpa:
     show-sql: true
     hibernate:

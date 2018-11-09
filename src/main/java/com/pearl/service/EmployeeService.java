@@ -6,6 +6,7 @@ import com.pearl.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Service
@@ -19,37 +20,31 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee addStudent(Employee employee) {
-
-        return employeeRepository.save(employee);
-    }
-
-    public Optional<Employee> findStudentById(Long id) {
-        return employeeRepository.findById(id);
-    }
-
-
-    public Iterable<Employee> findByNames(String firstName, String lastName) {
-
-        return employeeRepository.findByFirstNameAndLastName(firstName, lastName);
-    }
-
     public Iterable<Employee> findAll() {
 
         return employeeRepository.findAll();
     }
 
-    public Iterable<Employee> findByFirstName(String firstName) {
-        return employeeRepository.findByFirstName(firstName);
+    public Employee create(@NotNull Employee employee) {
+
+
+        return employeeRepository.save(employee);
     }
 
-    public Iterable<Employee> findByLastName(String lastName) {
-        return employeeRepository.findByLastName(lastName);
+    public Employee update(@NotNull Employee employee) {
+
+        Boolean employeeExist = findById(employee.getId()).isPresent();
+
+        if(employeeExist) {
+            return employeeRepository.save(employee);
+        }else {
+            return null;
+        }
     }
 
-    public Employee deleteStudent(Long id) {
+    public Employee delete(Long id) {
 
-        Optional<Employee> student = findStudentById(id);
+        Optional<Employee> student = findById(id);
 
         if (student.get() != null) {
             employeeRepository.delete(student.get());
@@ -58,4 +53,22 @@ public class EmployeeService {
         }
         return null;
     }
+
+    public Optional<Employee> findById(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+
+    public Iterable<Employee> search(String firstName, String lastName) {
+
+        if (firstName != null & lastName != null) {
+            return employeeRepository.findByFirstNameAndLastName(firstName, lastName);
+        } else if (firstName != null) {
+            return employeeRepository.findByFirstName(firstName);
+        } else if (lastName != null) {
+            return employeeRepository.findByLastName(lastName);
+        } else
+            return null;
+    }
+
 }

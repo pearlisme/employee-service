@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/employee")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -20,43 +20,40 @@ public class EmployeeController {
 
 
     @GetMapping
-    public Iterable<Employee> listStudents() {
+    public Iterable<Employee> findAll() {
         return employeeService.findAll();
     }
 
     @PostMapping(value = "/add")
-    public Employee addStudent(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody Employee employee) {
 
-        if (employee == null) return null;
+        return employeeService.create(employee);
+    }
 
-        return employeeService.addStudent(employee);
+    @PostMapping(value = "/update")
+    public Employee updateEmployee(@RequestBody Employee employee) {
+
+        return employeeService.update(employee);
     }
 
     @GetMapping("/find/{id}")
-    public Optional<Employee> findStudentById(@PathVariable Long id) {
-        return employeeService.findStudentById(id);
+    public Optional<Employee> findEmployeeById(@PathVariable Long id) {
+        return employeeService.findById(id);
     }
 
     @GetMapping("/search")
-    public Iterable<Employee> findStudentByFirstAndLastName(@RequestParam(value = "first", required = false) String firstName,
-                                                            @RequestParam(value = "last", required = false) String lastName) {
+    public Iterable<Employee> findEmployeeByFirstAndLastName(@RequestParam(value = "first", required = false) String firstName,
+                                                             @RequestParam(value = "last", required = false) String lastName) {
 
-        if (firstName != null & lastName != null) {
-            return employeeService.findByNames(firstName, lastName);
-        } else if (firstName != null) {
-            return employeeService.findByFirstName(firstName);
-        } else if (lastName != null) {
-            return employeeService.findByLastName(lastName);
-        } else
-            return employeeService.findAll();
+        return employeeService.search(firstName, lastName);
 
     }
 
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public Employee deleteStudent(@PathVariable Long id) {
+    public Employee deleteEmployee(@PathVariable Long id) {
 
-        return employeeService.deleteStudent(id);
+        return employeeService.delete(id);
 
 
     }
