@@ -7,17 +7,17 @@ spring:
 spring:
   profiles: dev
   application:
-    name: student-service
+    name: employee-service
   h2:
     console:
       path: /h2
       enabled: true
   datasource:
-    url: jdbc:h2:mem:student
+    url: jdbc:h2:mem:employee
     driver-class-name: org.h2.Driver
     platform: org.hibernate.dialect.H2Dialect
-    username: sa
-    password:
+    username: admin
+    password: admin
 
   jpa:
     show-sql: true
@@ -32,7 +32,7 @@ eureka:
     hostname: localhost
     port: 8761
 server:
-  port: 8081
+  port: 8083
 
 logging:
   level:
