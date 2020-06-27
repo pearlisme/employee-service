@@ -13,28 +13,34 @@ spring:
       path: /h2
       enabled: true
   datasource:
-    url: jdbc:h2:mem:employee
+    url: jdbc:h2:mem:~/employee
+#    ;AUTO_SERVER=TRUE
     driver-class-name: org.h2.Driver
     platform: org.hibernate.dialect.H2Dialect
-    username: admin
-    password: admin
+    username: sa
+    password:
 
   security:
+    basic:
+      enabled: false
     user:
       name: admin
       password: admin
+
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
-  instance:
-    hostname: localhost
-    port: 8761
+  banner:
+    image:
+      location: classpath:resources/bannername.txt
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+#  instance:
+#    hostname: localhost
+#    port: 8761
 server:
   port: 8083
 

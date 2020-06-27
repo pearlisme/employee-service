@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,6 +29,6 @@ public class Employee {
     private String mobile;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Address> addresses;
+    List<Address> addresses = new ArrayList<>();
 
 }

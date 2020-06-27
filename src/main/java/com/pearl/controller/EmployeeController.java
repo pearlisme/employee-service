@@ -5,6 +5,7 @@ import com.pearl.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,6 +57,12 @@ public class EmployeeController {
         return employeeService.delete(id);
 
 
+    }
+
+    @GetMapping(value = "/dump")
+    public List<Employee> addEmployee() {
+
+        return employeeService.createDump();
     }
 
 }

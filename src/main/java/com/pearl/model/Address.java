@@ -1,5 +1,10 @@
 package com.pearl.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +12,10 @@ import javax.persistence.Id;
 
 //@Embeddable
 @Entity
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     @Id
@@ -15,28 +24,4 @@ public class Address {
     private String street;
     private String city;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 }
