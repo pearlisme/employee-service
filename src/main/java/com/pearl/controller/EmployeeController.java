@@ -47,7 +47,6 @@ public class EmployeeController {
                                                              @RequestParam(value = "last", required = false) String lastName) {
 
         return employeeService.search(firstName, lastName);
-
     }
 
 
@@ -55,8 +54,6 @@ public class EmployeeController {
     public Employee deleteEmployee(@PathVariable Long id) {
 
         return employeeService.delete(id);
-
-
     }
 
     @GetMapping(value = "/dump")

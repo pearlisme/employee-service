@@ -18,6 +18,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "EMP_ID")
     private Long id;
 
     private String firstName;
@@ -29,6 +30,7 @@ public class Employee {
     private String mobile;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @Builder.Default
     List<Address> addresses = new ArrayList<>();
 
 }

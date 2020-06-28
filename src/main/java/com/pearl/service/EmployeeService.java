@@ -3,6 +3,8 @@ package com.pearl.service;
 
 import com.pearl.model.Address;
 import com.pearl.model.Employee;
+import com.pearl.model.Location;
+import com.pearl.model.Tag;
 import com.pearl.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class EmployeeService {
@@ -78,14 +81,23 @@ public class EmployeeService {
     }
 
     public List<Employee> createDump() {
-        int d = 99;
+        int d = new Random().nextInt();
         System.out.println("count"+ d);
-        for (int i = 9; i < d; i++) {
+        for (int i = 0; i < d; i++) {
             List<Address> addressList = new ArrayList<>();
+            List<Location> locationList = new ArrayList<>();
+            for (int k = 0; k < 3; k++) {
+               Location location = Location.builder()
+
+                       .build();
+
+               locationList.add(location);
+            }
             for (int j = 1; j < 3; j++) {
                 Address address = Address.builder()
                         .city("city_" + j)
                         .street("street_" + j)
+                        .country("country"+i)
                         .build();
                 addressList.add(address);
             }
@@ -97,7 +109,7 @@ public class EmployeeService {
                     .mobile("mobile_" + i)
                     .addresses(addressList)
                     .build();
-    logger.info("Employee :"+employee);
+        logger.info("Employee :"+employee);
             employeeRepository.save(employee);
             logger.info("Employee saved successfully id: "+ employee.getId());
         }

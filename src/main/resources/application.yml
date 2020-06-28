@@ -12,25 +12,34 @@ spring:
     console:
       path: /h2
       enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:~/employee
+##    ;AUTO_SERVER=TRUE
+#    driver-class-name: org.h2.Driver
+#    platform: org.hibernate.dialect.H2Dialect
+#    username: sa
+#    password:
   datasource:
-    url: jdbc:h2:mem:~/employee
+    url: jdbc:mysql://localhost:3306/employee?useSSL=false
 #    ;AUTO_SERVER=TRUE
-    driver-class-name: org.h2.Driver
-    platform: org.hibernate.dialect.H2Dialect
-    username: sa
-    password:
+#    driver-class-name: org.hibernate.dialect.MySQL5Dialect
+    platform: org.hibernate.dialect.MySQL5Dialect
+    username: root
+    password: root@123
 
-  security:
-    basic:
-      enabled: false
-    user:
-      name: admin
-      password: admin
+#  security:
+#    basic:
+#      enabled: false
+#    user:
+#      name: admin
+#      password: admin
 
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+
   banner:
     image:
       location: classpath:resources/bannername.txt
@@ -46,6 +55,7 @@ server:
 
 logging:
   level:
-    #web: debug
-    #root: debug
+#    web: debug
+#    root: debug
     sql: trace
+debug: false
